@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://grrrp.github.io/wedbudget/sitemap.xml
+Host: grrrp.github.io

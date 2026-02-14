@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX" />
+  <meta name="google-site-verification" content="PASTE_GOOGLE_SEARCH_CONSOLE_TOKEN" />
+  <meta name="msvalidate.01" content="PASTE_BING_WEBMASTER_TOKEN" />
+  <title>Free Wedding Budget Calculator — Plan Your Perfect Day | WedBudget</title>
+  <meta name="description" content="Instantly allocate your wedding budget across 10 categories. Customize with sliders, get vendor suggestions, and print your plan. Free, no signup." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#e8b4b8" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Wedding Budget Calculator | WedBudget" />
+  <meta name="twitter:description" content="Plan your wedding budget in 30 seconds with editable category sliders." />
+  <meta property="og:title" content="Free Wedding Budget Calculator | WedBudget" />
+  <meta property="og:description" content="Plan your wedding budget in 30 seconds with live category sliders and printable summary." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://grrrp.github.io/wedbudget/" />
+  <meta property="og:image" content="https://grrrp.github.io/wedbudget/assets/og-preview.svg" />
+  <link rel="canonical" href="https://grrrp.github.io/wedbudget/" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "WedBudget",
+    "url": "https://grrrp.github.io/wedbudget/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "description": "Instant wedding budget calculator with editable category sliders.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this wedding budget calculator free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. WedBudget is free and requires no signup."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I save and share my plan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can copy a share link, print to PDF, and your recent state is stored locally in the browser."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "WedBudget Categories",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Venue and Rentals"},
+      {"@type": "ListItem", "position": 2, "name": "Catering and Bar"},
+      {"@type": "ListItem", "position": 3, "name": "Photography and Video"},
+      {"@type": "ListItem", "position": 4, "name": "Music and Entertainment"},
+      {"@type": "ListItem", "position": 5, "name": "Flowers and Decor"}
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container hero-inner">
+      <h1>Plan Your Dream Wedding Budget in 30 Seconds</h1>
+      <p>Create a realistic budget breakdown, customize each category, and save your plan.</p>
+      <div class="input-row">
+        <label>Total Budget
+          <input id="totalBudget" type="number" min="100" step="100" placeholder="25000" />
+        </label>
+        <label>Currency
+          <select id="currency">
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="EUR">EUR</option>
+            <option value="AUD">AUD</option>
+            <option value="CAD">CAD</option>
+          </select>
+        </label>
+        <label>Wedding Size
+          <select id="weddingSize">
+            <option value="intimate">Intimate (&lt;50)</option>
+            <option value="medium" selected>Medium (50-150)</option>
+            <option value="large">Large (150-300)</option>
+            <option value="grand">Grand (300+)</option>
+          </select>
+        </label>
+        <button id="calculateBtn">Calculate</button>
+        <button id="resetBtn" class="secondary">Reset</button>
+      </div>
+      <div class="ad-slot top-ad"><!-- AdSense code here --></div>
+    </div>
+  </header>
+
+  <main class="container" id="resultsSection" hidden>
+    <section class="results-layout">
+      <article class="panel">
+        <h2>Budget Breakdown</h2>
+        <canvas id="budgetChart" height="280"></canvas>
+        <div class="actions">
+          <button id="shareBtn">Copy Share Link</button>
+          <button id="printBtn" class="secondary">Save/Print PDF</button>
+        </div>
+      </article>
+
+      <aside class="panel ad-panel">
+        <div class="ad-slot side-ad"><!-- AdSense code here --></div>
+      </aside>
+    </section>
+
+    <section class="panel">
+      <h2>Category Allocation</h2>
+      <div id="categoryList" class="category-list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Wedding Budget Planning Tips</h2>
+      <p>Most couples overspend when they underestimate venue, catering, and hidden service fees. Start with a realistic total, keep a 5% buffer, and adjust line items to fit your priorities.</p>
+      <p><strong>FAQ:</strong> The calculator is free, your inputs stay in-browser, and the generated plan can be printed or shared with your partner and planner.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Free Wedding Budget Calculator by Category</h2>
+      <p>WedBudget helps couples build a <strong>wedding budget breakdown</strong> across venue, food, photography, decor, attire, and contingency. Use it as a <strong>wedding cost estimator</strong> before contacting vendors.</p>
+      <p>The share link option is useful for planning discussions with family, partner, or coordinator.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Related Free Tools</h2>
+      <p>
+        <a href="https://grrrp.github.io/qrforge/">QRForge</a> ·
+        <a href="https://grrrp.github.io/pdfkit-online/">PDFKit Online</a> ·
+        <a href="https://grrrp.github.io/namespark/">NameSpark</a> ·
+        <a href="https://grrrp.github.io/brandforge/">BrandForge</a>
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Sponsored</h2>
+      <div class="ad-slot" style="min-height: 250px;"><!-- AdSense in-content unit --></div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <small>© 2026 WedBudget · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a></small>
+  </footer>
+
+  <div id="consentBanner" class="consent-banner" hidden>
+    <p>We store planning preferences locally and may use cookies for ads/analytics where enabled.</p>
+    <div class="consent-actions">
+      <button id="consentAccept">Accept</button>
+    </div>
+  </div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script defer src="js/app.js"></script>
+  <script>
+    (() => {
+      const key = 'consent-wedbudget-v1';
+      const banner = document.getElementById('consentBanner');
+      const btn = document.getElementById('consentAccept');
+      const loadAds = () => {
+        if (window.__wedbudgetAdsLoaded) return;
+        window.__wedbudgetAdsLoaded = true;
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX';
+        script.crossOrigin = 'anonymous';
+        document.head.appendChild(script);
+
+        document.querySelectorAll('.ad-slot').forEach((slot, index) => {
+          slot.innerHTML = `<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="000000002${index + 1}" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        });
+      };
+
+      if (!localStorage.getItem(key)) {
+        banner.hidden = false;
+      } else {
+        loadAds();
+      }
+      btn.addEventListener('click', () => {
+        localStorage.setItem(key, 'accepted');
+        banner.hidden = true;
+        loadAds();
+      });
+    })();
+  </script>
+</body>
+</html>
